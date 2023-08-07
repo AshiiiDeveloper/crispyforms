@@ -12,6 +12,7 @@
     {{ form|crispy }}
     <button class="btn btn-primary" type="submit" value="submit" style="width: 100px">Submit</button>
 </form>
+    <span>Already have an accoutn? <a href="{% url 'login' %}">login</a></span>
 {% for message in messages %}
     {% if message.tags == 'success' %}
        <div class="alert alert-success alert-dismissible fade show" role="alert">
