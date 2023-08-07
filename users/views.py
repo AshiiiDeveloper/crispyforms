@@ -17,19 +17,17 @@ def signup(request):
     return render(request, 'users/index.html', context)
 
 
-def user_login(request):
+def Login(request):
     if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            email = form.cleaned_data['email']
-            password = form.cleaned_data['password']
-            user = authenticate(request, username=email, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect('home')
-            else:
-
-                return HttpResponse("error")
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('home')
     else:
-        form = LoginForm()
-    return render(request, 'users/login.html', {'form': form})
+        return render(request, 'users/login.html')
+
+
+def home(request):
+    return render(request, 'users/home.html')
